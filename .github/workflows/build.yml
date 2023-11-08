@@ -10,7 +10,9 @@ jobs:
 
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, cpu]
+    container:
+      image: ubuntu:latest
 
     steps:
     - uses: actions/checkout@v4
@@ -22,9 +24,6 @@ jobs:
 
     - name: Run Python unit tests
       run: python3 -u -m unittest tests/tests.py
-
-    - name: Verify that the Docker image for the action builds
-      run: docker build . --file Dockerfile
 
     - name: Integration test
       id: integration
